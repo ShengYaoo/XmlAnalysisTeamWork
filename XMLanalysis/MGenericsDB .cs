@@ -1,36 +1,62 @@
 ﻿using System;
 using System.Data.SqlClient;
 using OpenData;
+using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace XMLanalysis
 {
 
 
-    interface IGenericsDB<T>{
-        void IGenericsDB(T mTable);
+    public interface MGenericsDB<T> where T:class{
+        List<T> Xml_Load();        
         void InsertData(T item);
-        void QueryData(string Row, string Name);
-    }
-    public class MGenericsDB
-    {
-        
+        List<T> QueryData(string Row, string Name);
+        void ShowData(List<T> list);
 
     }
-    public class FarmTranTable : IGenericsDB<FarmTran>
+  
+    public class FarmTranTable : MGenericsDB<FarmTran>
     {
         SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=mDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         private static int count = 0;
-        FarmTran mTable;
-
-        public void IGenericsDB(FarmTran Table)
-        {
-            mTable = Table;
+        
+        public static string getValue(XElement node, string propertyName) {
+            return node.Element(propertyName)?.Value.Trim();
         }
+
+        public List<FarmTran> Xml_Load(){
+
+            XDocument docNew = XDocument.Load(@"E:\C#\XmlAnalysisTeamWork\FarmTransData.xml");
+            //Console.WriteLine(docNew.ToString());
+            IEnumerable<XElement> nodes = docNew.Element("DocumentElement").Elements("row");
+            
+            var nodeList = new List<FarmTran>();
+
+            nodeList = nodes
+                .Select(node => {
+                    var item = new FarmTran();
+                    item.transactionDate = getValue(node, "交易日期");
+                    item.cropCode = getValue(node, "作物代號");
+                    item.cropName = getValue(node, "作物名稱");
+                    item.marketCode = getValue(node, "市場代號");
+                    item.marketName = getValue(node, "市場名稱");
+                    item.priceHigh = getValue(node, "上價");
+                    item.priceMid = getValue(node, "中價");
+                    item.priceLow = getValue(node, "下價");
+                    item.priceAvg = getValue(node, "平均價");
+                    item.transactionNum = getValue(node, "交易量");
+                    return item;
+
+                }).ToList();
+            return nodeList;
+        }
+
 
         public void InsertData(FarmTran item)
         {
             count += 1;
-
-
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
@@ -40,7 +66,7 @@ namespace XMLanalysis
             connection.Close();
         }
 
-        public void QueryData(string Row, string Name)
+        public List<FarmTran> QueryData(string Row, string Name)
         {
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
@@ -49,12 +75,27 @@ namespace XMLanalysis
 
             SqlDataReader reader = cmd.ExecuteReader();
 
+            var mFarm = new List<FarmTran>();
             try
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine("Execute Query");
-                    Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}, {reader[2]}, {reader[3]}, {reader[4]}, {reader[5]}"));
+                    var item = new FarmTran
+                    {
+                    transactionDate = reader[1].ToString(),
+                    cropCode = reader[2].ToString(),
+                    cropName = reader[3].ToString(),
+                    marketCode = reader[4].ToString(),
+                    marketName = reader[5].ToString(),
+                    priceHigh = reader[6].ToString(),
+                    priceMid = reader[7].ToString(),
+                    priceLow = reader[8].ToString(),
+                    priceAvg = reader[9].ToString(),
+                    transactionNum = reader[10].ToString()
+                    };
+                    mFarm.Add(item);
+        
+
                 }
             }
             finally
@@ -63,57 +104,16 @@ namespace XMLanalysis
 
             }
             connection.Close();
+            return mFarm;
+        }
+
+        public void ShowData(List<FarmTran> list)
+        {
+            list.ForEach(item => {
+                Console.WriteLine(string.Format($"市場名稱:{item.marketName} 作物名稱:{item.cropName}"));
+            });
         }
     }
-    public class PharmaTable : IGenericsDB<PharmaceuticalFactory>
-    {
-        SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=mDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
-        private static int count = 0;
-        PharmaceuticalFactory mTable;
-
-        public void IGenericsDB(PharmaceuticalFactory Table)
-        {
-            mTable = Table;
-        }
-
-        public void InsertData(PharmaceuticalFactory item)
-        {
-            count += 1;
-
-            Console.WriteLine("InsertData Exe");
-            connection.Open();
-            SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = string.Format($"insert into Pharma (Id,type,name,address,formulation,approved_items,GMP,GDP,note) " +
-                                                        $"values ('{count}',N'{item.type}',N'{item.name}',N'{item.address}',N'{item.formulation}',N'{item.approved_items}',N'{item.GMP}',N'{item.GDP}',N'{item.note}')");
-            cmd.ExecuteNonQuery();
-            connection.Close();
-        }
-
-        public void QueryData(string Row, string Name)
-        {
-            connection.Open();
-            SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = string.Format($"SELECT * FROM Pharma WHERE {Row}= N'{Name}' ");
-
-            SqlDataReader reader = cmd.ExecuteReader();
-
-            try
-            {
-                while (reader.Read())
-                {
-                    Console.WriteLine("Execute Query");
-                    Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}, {reader[2]}, {reader[3]}, {reader[4]}, {reader[5]}"));
-                }
-            }
-            finally
-            {
-                reader.Close();
-
-            }
-            connection.Close();
-        }
-    }
+    
 
 }
