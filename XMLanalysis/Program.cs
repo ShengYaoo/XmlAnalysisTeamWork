@@ -9,43 +9,12 @@ namespace XMLanalysis   {
     class Program{
         static void Main(string[] args){
 
-            LoadFarmTran();
+    
             LoadPharma();
         }
-        private static void LoadFarmTran() {
-            var nodeList = new List<FarmTran>();
 
-            XDocument docNew = XDocument.Load(@"C:\Users\user\Downloads\XMLanalysis-master\XMLanalysis-master\FarmTransData.xml");
-            //Console.WriteLine(docNew.ToString());
-            IEnumerable<XElement> nodes = docNew.Element("DocumentElement").Elements("row");
-
-            nodeList = nodes
-                .Select(node => {
-                    var item = new FarmTran();
-                    item.transactionDate = getValue(node, "交易日期");
-                    item.cropCode = getValue(node, "作物代號");
-                    item.cropName = getValue(node, "作物名稱");
-                    item.marketCode = getValue(node, "市場代號");
-                    item.marketName = getValue(node, "市場名稱");
-                    item.priceHigh = getValue(node, "上價");
-                    item.priceMid = getValue(node, "中價");
-                    item.priceLow = getValue(node, "下價");
-                    item.priceAvg = getValue(node, "平均價");
-                    item.transactionNum = getValue(node, "交易量");
-                    return item;
-
-                }).ToList();
-
-            FarmTranTable mFarm = new FarmTranTable();
-            nodeList.ForEach(item =>
-            {
-                mFarm.InsertData(item);
-
-            });
-            Console.ReadKey();
-        }
         private static void LoadPharma() {
-            XElement element = XElement.Load(@"C:\Users\user\Downloads\XMLanalysis-master\XMLanalysis-master\PharmaceuticalFactoryData.xml");
+            XElement element = XElement.Load(@"D:\gitwork\XmlAnalysisTeamWork\XMLanalysis\bin\Debug\Data.xml");
             List<PharmaceuticalFactory> list = new List<PharmaceuticalFactory>();
             element.Descendants("row").ToList().ForEach(row =>
             {

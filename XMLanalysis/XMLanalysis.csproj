@@ -42,8 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectDB.cs" />
-    <Compile Include="OpenData\FarmTran.cs" />
+    <Compile Include="OpenData\PharmaceuticalFactory.cs" />
     <Compile Include="MGenericsDB .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
