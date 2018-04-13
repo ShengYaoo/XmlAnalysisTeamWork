@@ -18,7 +18,7 @@ namespace XMLanalysis   {
             {
                 mPF.InsertData(item);
             });*/
-            mPF.ShowData(mPF.QueryData("類別", "椰子"));
+            mPF.ShowData(mPF.QueryData("類別", "西藥製劑廠"));
             Console.ReadKey();
         }
 
