@@ -53,7 +53,7 @@ namespace XMLanalysis
                 connection.Open();
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = string.Format($"insert into Pharma (Id,類別,名稱,地址,核准類型,核定品項,GMP核定作業內容,GDP核定內容,備註) " +
+                cmd.CommandText = string.Format($"insert into Pharma (ID,類別,名稱,地址,核准類型,核定品項,GMP核定作業內容,GDP核定內容,備註) " +
                                                             $"values ('{count}',N'{item.type}',N'{item.name}',N'{item.address}',N'{item.formulation}',N'{item.approved_items}',N'{item.GMP}',N'{item.GDP}',N'{item.note}')");
                 cmd.ExecuteNonQuery();
                 connection.Close();
@@ -76,13 +76,13 @@ namespace XMLanalysis
                         PharmaceuticalFactory PF = new PharmaceuticalFactory
                         {
                             type = reader[1].ToString(),
-                            name = reader[1].ToString(),
-                            address = reader[1].ToString(),
-                            formulation = reader[1].ToString(),
-                            approved_items = reader[1].ToString(),
-                            GMP = reader[1].ToString(),
-                            GDP = reader[1].ToString(),
-                            note = reader[1].ToString()
+                            name = reader[2].ToString(),
+                            address = reader[3].ToString(),
+                            formulation = reader[4].ToString(),
+                            approved_items = reader[5].ToString(),
+                            GMP = reader[6].ToString(),
+                            GDP = reader[7].ToString(),
+                            note = reader[8].ToString()
                         };
 
                         mPF.Add(PF);
