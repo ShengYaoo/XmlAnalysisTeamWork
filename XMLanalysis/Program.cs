@@ -13,11 +13,11 @@ namespace XMLanalysis   {
 
 
             MGenericsDB<PharmaceuticalFactory> mPF = new PharmaTable();
-            /*var nodeList = mFarm.Xml_Load();
+            var nodeList = mPF.Xml_Load();
             nodeList.ForEach(item =>
             {
                 mPF.InsertData(item);
-            });*/
+            });
             mPF.ShowData(mPF.QueryData("類別", "西藥製劑廠"));
             Console.ReadKey();
         }
