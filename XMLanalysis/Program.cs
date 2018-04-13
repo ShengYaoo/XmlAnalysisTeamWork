@@ -10,11 +10,11 @@ namespace XMLanalysis   {
         static void Main(string[] args){
 
             MGenericsDB<FarmTran> mFarm = new FarmTranTable();
-            /*var nodeList = mFarm.Xml_Load();
+            var nodeList = mFarm.Xml_Load();
             nodeList.ForEach(item =>
             {
                 mFarm.InsertData(item);
-            });*/
+            });
             mFarm.ShowData(mFarm.QueryData("作物名稱", "椰子"));
             Console.ReadKey();
         }
