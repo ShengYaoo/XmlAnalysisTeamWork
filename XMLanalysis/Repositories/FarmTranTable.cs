@@ -4,12 +4,14 @@ using OpenData;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
+using XMLanalysis.Shared;
 
 namespace XMLanalysis
 {
     public class FarmTranTable : MGenericsDB<FarmTran>
     {
-        SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=mDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+        
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+SharedDB.GetDataPath() + @"mDB.mdf" +";Integrated Security=True");
         private static int count = 0;
 
         public static string getValue(XElement node, string propertyName)
@@ -98,12 +100,33 @@ namespace XMLanalysis
             connection.Close();
             return mFarm;
         }
+        public void UpdateData(int updateID,FarmTran item)
+        {
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = string.Format($"UPDATE Farmtran SET 交易日期 = '{item.transactionDate}', 作物代號 = '{item.cropCode}', 作物名稱 = N'{item.cropName}', 市場代號 = '{item.marketCode}', 市場名稱 = N'{item.marketName}', 上價 = '{item.priceHigh}', 中價 = '{item.priceMid}', 下價 = '{item.priceLow}', 平均價 = '{item.priceAvg}', 交易量 = '{item.transactionNum}' WHERE ID = {updateID} ");
+            cmd.ExecuteNonQuery();
+            connection.Close();
 
+        }
+        public void DeleteData(string deleteColumn, string deleteName)
+        {
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = string.Format($"DELETE FarmTran WHERE {deleteColumn}= N'{deleteName}' ");
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
+        }
         public void ShowData(List<FarmTran> list)
         {
             list.ForEach(item => {
-                Console.WriteLine(string.Format($"市場名稱:{item.marketName} 作物名稱:{item.cropName}"));
+                Console.WriteLine(string.Format($"交易日期: {item.transactionDate} 作物代號: {item.cropCode} 作物名稱: {item.cropName} 市場代號: {item.marketCode} 市場名稱:{item.marketName} 平均價:{item.priceAvg}"));
             });
         }
+
+        
     }
 }
