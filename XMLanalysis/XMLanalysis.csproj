@@ -42,7 +42,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpenData\桃園公共自行車即時服務資料.cs" />
     <Compile Include="FarmTranTable.cs" />
+    <Compile Include="ParkingDB.cs" />
     <Compile Include="OpenData\FarmTran.cs" />
     <Compile Include="MGenericsDB .cs" />
     <Compile Include="Program.cs" />
