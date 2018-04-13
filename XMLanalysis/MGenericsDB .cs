@@ -12,7 +12,7 @@ namespace XMLanalysis
     public interface MGenericsDB<T> where T:class{
         List<T> Xml_Load();        
         void InsertData(T item);
-        List<T> QueryData(string Row, string Name);
+        List<T> QueryData(string searchColumn, string searchName);
         void ShowData(List<T> list);
 
     }
@@ -66,12 +66,12 @@ namespace XMLanalysis
             connection.Close();
         }
 
-        public List<FarmTran> QueryData(string Row, string Name)
+        public List<FarmTran> QueryData(string searchColumn, string searchName)
         {
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = string.Format($"SELECT * FROM FarmTran WHERE {Row}= N'{Name}' ");
+            cmd.CommandText = string.Format($"SELECT * FROM FarmTran WHERE {searchColumn}= N'{searchName}' ");
 
             SqlDataReader reader = cmd.ExecuteReader();
 
