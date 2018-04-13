@@ -1,36 +1,60 @@
 ﻿using System;
 using System.Data.SqlClient;
 using OpenData;
+using System.Xml.Linq;
+using System.Collections.Generic;
+using System.Linq;
 namespace XMLanalysis
 {
 
 
-    interface IGenericsDB<T>{
-        void IGenericsDB(T mTable);
+    interface MGenericsDB<T>{
+        List<T> Xml_Load();
         void InsertData(T item);
-        void QueryData(string Row, string Name);
+        List<T> QueryData(string Row, string Name);
+        void ShowData(List<T> list);
     }
-    public class MGenericsDB
-    {
-        
-
-    }
-    public class PharmaTable : IGenericsDB<PharmaceuticalFactory>
+    public class PharmaTable : MGenericsDB<PharmaceuticalFactory>
     {
         SqlConnection connection = new SqlConnection(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=mDB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
         private static int count = 0;
-        PharmaceuticalFactory mTable;
 
-        public void IGenericsDB(PharmaceuticalFactory Table)
+        public static string getValue(XElement node, string propertyName)
         {
-            mTable = Table;
+            return node.Element(propertyName)?.Value.Trim();
+        }
+
+
+        public List<PharmaceuticalFactory> Xml_Load()
+        {
+
+            XDocument docNew = XDocument.Load(@"E:\C#\XmlAnalysisTeamWork\FarmTransData.xml");
+            //Console.WriteLine(docNew.ToString());
+            IEnumerable<XElement> nodes = docNew.Element("DocumentElement").Elements("row");
+
+            var nodeList = new List<PharmaceuticalFactory>();
+
+            nodeList = nodes
+                .Select(node => {
+                    var PF = new PharmaceuticalFactory();
+                    PF.type = getValue(node, "Col1");
+                    PF.name = getValue(node, "Col2");
+                    PF.address = getValue(node, "Col3");
+                    PF.formulation = getValue(node, "Col4");
+                    PF.approved_items = getValue(node, "Col5");
+                    PF.GMP = getValue(node, "Col6");
+                    PF.GDP = getValue(node, "Col7");
+                    PF.note = getValue(node, "Col8");
+                    return PF;
+                    
+
+                }).ToList();
+            return nodeList;
         }
 
         public void InsertData(PharmaceuticalFactory item)
         {
             count += 1;
-
-            Console.WriteLine("InsertData Exe");
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
@@ -40,7 +64,7 @@ namespace XMLanalysis
             connection.Close();
         }
 
-        public void QueryData(string Row, string Name)
+        public List<PharmaceuticalFactory> QueryData(string Row, string Name)
         {
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
@@ -49,12 +73,24 @@ namespace XMLanalysis
 
             SqlDataReader reader = cmd.ExecuteReader();
 
-            try
+            var mPF = new List<PharmaceuticalFactory>();
+            try 
             {
                 while (reader.Read())
                 {
-                    Console.WriteLine("Execute Query");
-                    Console.WriteLine(String.Format($"{reader[0]}, {reader[1]}, {reader[2]}, {reader[3]}, {reader[4]}, {reader[5]}"));
+                    PharmaceuticalFactory PF = new PharmaceuticalFactory
+                    {
+                        type = reader[1].ToString(),
+                        name = reader[1].ToString(),
+                        address = reader[1].ToString(),
+                        formulation = reader[1].ToString(),
+                        approved_items = reader[1].ToString(),
+                        GMP = reader[1].ToString(),
+                        GDP = reader[1].ToString(),
+                        note = reader[1].ToString()
+                    };
+
+                    mPF.Add(PF);
                 }
             }
             finally
@@ -63,7 +99,15 @@ namespace XMLanalysis
 
             }
             connection.Close();
+            return mPF;
         }
+        public void ShowData(List<PharmaceuticalFactory> list)
+        {
+            list.ForEach(item => {
+                Console.WriteLine(string.Format($"類別:{item.type} 名稱:{item.name}"));
+            });
+        }
+
     }
 
 }
