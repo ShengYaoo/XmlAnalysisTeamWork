@@ -20,7 +20,7 @@ namespace XMLanalysis
         public List<FarmTran> Xml_Load()
         {
 
-            XDocument docNew = XDocument.Load(@".\..\..\..\FarmTransData.xml");
+            XDocument docNew = XDocument.Load(@".\..\..\OpenData\FarmTransData.xml");
             //Console.WriteLine(docNew.ToString());
             IEnumerable<XElement> nodes = docNew.Element("DocumentElement").Elements("row");
 

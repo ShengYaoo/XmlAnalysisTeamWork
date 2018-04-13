@@ -42,14 +42,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FarmTranTable.cs" />
+    <Compile Include="Repositories\FarmTranTable.cs" />
     <Compile Include="OpenData\FarmTran.cs" />
-    <Compile Include="MGenericsDB .cs" />
+    <Compile Include="Repositories\MGenericsDB .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="OpenData\FarmTransData.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
