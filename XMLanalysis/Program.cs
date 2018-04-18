@@ -8,10 +8,8 @@ namespace XMLanalysis   {
      
     class Program{
         static void Main(string[] args){
-            /*
+            
             MGenericsDB<Pharmacy_03> mPharmacy_03 = new PharmacyTable_03();
-            */
-
             /*
             var nodeList = mFarm.Xml_Load();
             nodeList.ForEach(item =>
@@ -28,18 +26,24 @@ namespace XMLanalysis   {
             //mFarm.DeleteData("交易日期", "107.4.13");
             //mFarm.ShowData(mFarm.QueryData("交易日期", "107.4.13"));
             //Console.ReadKey();
-            /*
-            var nodeList = mPharmacy_03.Xml_Load();
+ //-------------------------------------------------------------           
+            /*var nodeList = mPharmacy_03.Xml_Load();
             nodeList.ForEach(item =>
             {
                 PharmacyTable_03 SqlData;
                 SqlData = new PharmacyTable_03();
                 SqlData.InsertData(item);
-            });
+            });*/
+            mPharmacy_03.ShowData(mPharmacy_03.QueryData("機構名稱", "和平藥局"));
+            var nPharmacy_03 = new Pharmacy_03();
+            nPharmacy_03.機構名稱 = "機構名稱";
+            nPharmacy_03.機構狀態 = "機構狀態";
+            nPharmacy_03.地址 = "地址";
+            nPharmacy_03.電話 = "電話";
+            mPharmacy_03.UpdateData(1, nPharmacy_03);
+            mPharmacy_03.DeleteData("機構名稱", "機構名稱");
             Console.ReadKey();
-            */
-        }
-          
             
+        }                    
      }
 }
