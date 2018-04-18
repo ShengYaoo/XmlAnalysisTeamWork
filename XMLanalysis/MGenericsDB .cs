@@ -10,7 +10,7 @@ namespace XMLanalysis
         void InsertData(T item);
         List<T> QueryData(string Row, string Name);
         void UpdateData(int updateID, T item);
-        void DeleteData(string deleteColumn, string deletehName);
+        void DeleteData(string deleteColumn, string deleteName);
         void ShowData(List<T> list);
     }
    

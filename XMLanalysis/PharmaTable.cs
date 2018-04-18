@@ -105,12 +105,22 @@ namespace XMLanalysis
 
         public void UpdateData(int updateID, PharmaceuticalFactory item)
         {
-            throw new NotImplementedException();
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = string.Format($"UPDATE PharmaceuticalFactory SET 類別='{item.type}',名稱='{item.name}',地址='{item.address}',核准類型='{item.formulation}',核定品項='{item.approved_items}',GMP核定作業內容='{item.GMP}',GDP核定內容='{item.GDP}',備註='{item.note}' WHERE ID ={updateID} ");
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
 
-        public void DeleteData(string deleteColumn, string deletehName)
+        public void DeleteData(string deleteColumn, string deleteName)
         {
-            throw new NotImplementedException();
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = string.Format($"DELETE PharmaceuticalFactory WHERE {deleteColumn}= N'{deleteName}' ");
+            cmd.ExecuteNonQuery();
+            connection.Close();
         }
     }
     
