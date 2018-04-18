@@ -68,6 +68,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\dbo.藥局.sql" />
     <Content Include="App_Data\dbo.FarmTran.sql" />
     <Content Include="App_Data\dbo.Pharma.sql" />
     <Content Include="App_Data\mDB.mdf">
