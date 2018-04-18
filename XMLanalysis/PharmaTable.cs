@@ -23,7 +23,7 @@ namespace XMLanalysis
             public List<PharmaceuticalFactory> Xml_Load()
             {
 
-                XDocument docNew = XDocument.Load(@"C:\Users\user\source\repos\XmlAnalysisTeamWork\XMLanalysis\OpenData\PharmaceuticalFactory.xml");
+                XDocument docNew = XDocument.Load(@"D:\gitwork\0418\XMLanalysis\OpenData\PharmaceuticalFactory.xml");
                 //Console.WriteLine(docNew.ToString());
                 IEnumerable<XElement> nodes = docNew.Element("table").Elements("row");
 
@@ -103,6 +103,15 @@ namespace XMLanalysis
                 });
             }
 
+        public void UpdateData(int updateID, PharmaceuticalFactory item)
+        {
+            throw new NotImplementedException();
         }
+
+        public void DeleteData(string deleteColumn, string deletehName)
+        {
+            throw new NotImplementedException();
+        }
+    }
     
 }
