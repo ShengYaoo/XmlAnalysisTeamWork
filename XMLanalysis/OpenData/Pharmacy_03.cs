@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ConsoleApp1
+namespace XMLanalysis
 {
-    class OpenData
+    class Pharmacy_03
     {
         public string 機構名稱 { get; set; }
         public string 機構狀態 { get; set; }
