@@ -23,7 +23,7 @@ namespace XMLanalysis
             public List<PharmaceuticalFactory> Xml_Load()
             {
 
-                XDocument docNew = XDocument.Load(@"D:\gitwork\0418\XMLanalysis\OpenData\PharmaceuticalFactory.xml");
+                XDocument docNew = XDocument.Load(@".\..\..\OpenData\PharmaceuticalFactory.xml");
                 //Console.WriteLine(docNew.ToString());
                 IEnumerable<XElement> nodes = docNew.Element("table").Elements("row");
 
@@ -53,7 +53,7 @@ namespace XMLanalysis
                 connection.Open();
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = string.Format($"insert into Pharma (ID,類別,名稱,地址,核准類型,核定品項,GMP核定作業內容,GDP核定內容,備註) " +
+                cmd.CommandText = string.Format($"insert into PharmaceuticalFactory (ID,類別,名稱,地址,核准類型,核定品項,GMP核定作業內容,GDP核定內容,備註) " +
                                                             $"values ('{count}',N'{item.type}',N'{item.name}',N'{item.address}',N'{item.formulation}',N'{item.approved_items}',N'{item.GMP}',N'{item.GDP}',N'{item.note}')");
                 cmd.ExecuteNonQuery();
                 connection.Close();
@@ -64,7 +64,7 @@ namespace XMLanalysis
                 connection.Open();
                 SqlCommand cmd = connection.CreateCommand();
                 cmd.CommandType = System.Data.CommandType.Text;
-                cmd.CommandText = string.Format($"SELECT * FROM Pharma WHERE {Row}= N'{Name}' ");
+                cmd.CommandText = string.Format($"SELECT * FROM PharmaceuticalFactory WHERE {Row}= N'{Name}' ");
 
                 SqlDataReader reader = cmd.ExecuteReader();
 
