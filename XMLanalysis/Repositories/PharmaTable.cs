@@ -4,14 +4,15 @@ using System.Data.SqlClient;
 using OpenData;
 using System.Xml.Linq;
 using System.Linq;
-using XMLanalysis.shareddb;
+using XMLanalysis.Shared;
+
 namespace XMLanalysis
 {
    
     
         public class PharmaTable : MGenericsDB<PharmaceuticalFactory>
         {
-            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + SharedDB.GetDataPath() + @"mDB.mdf" + ";Integrated Security=True);
+            SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + SharedDB.GetDataPath() + @"mDB.mdf" + ";Integrated Security=True)";
             private static int count = 0;
 
             public static string getValue(XElement node, string propertyName)
