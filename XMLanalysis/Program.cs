@@ -9,13 +9,9 @@ namespace XMLanalysis   {
     class Program{
         static void Main(string[] args){
 
-            MGenericsDB<FarmTran> mFarm = new FarmTranTable();
+            MGenericsDB<桃園公共自行車即時服務資料> mFarm = new ParkingDB();
             var nodeList = mFarm.Xml_Load();
-            nodeList.ForEach(item =>
-            {
-                mFarm.InsertData(item);
-            });
-            mFarm.ShowData(mFarm.QueryData("作物名稱", "椰子"));
+
             Console.ReadKey();
         }
           
