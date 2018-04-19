@@ -57,10 +57,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpenData\FarmTran.cs" />
     <Compile Include="OpenData\PharmaceuticalFactory.cs" />
+    <Compile Include="OpenData\Pharmacy_03.cs" />
+    <Compile Include="Repositories\FarmTranTable.cs" />
     <Compile Include="Repositories\MGenericsDB .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\PharmacyTable_03.cs" />
     <Compile Include="Repositories\PharmaTable.cs" />
     <Compile Include="Shared\SharedDB.cs" />
   </ItemGroup>
@@ -80,7 +84,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\dbo.FarmTran.sql" />
     <Content Include="App_Data\dbo.PharmaceuticalFactory.sql" />
+    <Content Include="App_Data\dbo.藥局資訊.sql" />
     <Content Include="App_Data\mDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -88,7 +94,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>mDB.mdf</DependentUpon>
     </Content>
+    <Content Include="OpenData\FarmTransData.xml" />
     <Content Include="OpenData\PharmaceuticalFactory.xml" />
+    <Content Include="OpenData\Pharmacy_03.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
