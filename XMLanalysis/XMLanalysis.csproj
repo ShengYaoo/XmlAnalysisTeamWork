@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="sharedDB.cs" />
     <Compile Include="OpenData\PharmaceuticalFactory.cs" />
     <Compile Include="MGenericsDB .cs" />
     <Compile Include="Program.cs" />
