@@ -28,8 +28,8 @@ namespace XMLanalysis
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = string.Format($"insert into 桃園公共自行車即時服務資料 (ID, areaId, areaName, parkName, totalSpace, surplusSpace, payGuide, introduction, address, wgsx, wgsy, parkId) " +
-                                                        $"values ('{count}', '{item.areaId}','{item.areaName}',N'{item.parkName}','{item.totalSpace}',N'{item.surplusSpace}','{item.payGuide}','{item.introduction}','{item.wgsx}','{item.wgsy}','{item.parkId}')");
+            cmd.CommandText = string.Format($"insert into 桃園公共自行車即時服務資料 (id, areaId, areaName, parkName, totalSpace, surplusSpace, payGuide, introduction, address, wgsx, wgsy, parkId) " +
+                                                        $"values ('{count}','{item.areaId}','{item.areaName}',N'{item.parkName}','{item.totalSpace}',N'{item.surplusSpace}','{item.payGuide}','{item.introduction}','{item.address}','{item.wgsx}','{item.wgsy}','{item.parkId}')");
             cmd.ExecuteNonQuery();
             connection.Close();
 
@@ -141,9 +141,10 @@ namespace XMLanalysis
 
             }
             cacheList = nodeList;
+
+            //Load into SQL Data
             return nodeList;
         }
-
 
     }
 }
