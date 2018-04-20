@@ -28,8 +28,8 @@ namespace XMLanalysis
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
-            cmd.CommandText = string.Format($"insert into 桃園公共自行車即時服務資料 (areaId, areaName, parkName, totalSpace, surplusSpace, payGuide, introduction, address, wgsx, wgsy, parkId) " +
-                                                        $"values ('{item.areaId}','{item.areaName}',N'{item.parkName}','{item.totalSpace}',N'{item.surplusSpace}','{item.payGuide}','{item.introduction}','{item.wgsx}','{item.wgsy}','{item.parkId}')");
+            cmd.CommandText = string.Format($"insert into 桃園公共自行車即時服務資料 (ID, areaId, areaName, parkName, totalSpace, surplusSpace, payGuide, introduction, address, wgsx, wgsy, parkId) " +
+                                                        $"values ('{count}', '{item.areaId}','{item.areaName}',N'{item.parkName}','{item.totalSpace}',N'{item.surplusSpace}','{item.payGuide}','{item.introduction}','{item.wgsx}','{item.wgsy}','{item.parkId}')");
             cmd.ExecuteNonQuery();
             connection.Close();
 
@@ -38,6 +38,14 @@ namespace XMLanalysis
         public void UpdateData(int updateID, 桃園公共自行車即時服務資料 item)
         {
             cacheList[updateID] = item;
+
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = string.Format($"UPDATE 桃園公共自行車即時服務資料 SET areaId = '{item.areaId}', areaName = '{item.areaName}', parkName = N'{item.parkName}', totalSpace = '{item.totalSpace}', surplusSpace = N'{item.surplusSpace}', payGuide = '{item.payGuide}', introduction = '{item.introduction}', address = '{item.address}', wgsx = '{item.wgsx}', wgsy = '{item.wgsy}', parkId = '{item.parkId}' WHERE ID = {updateID} ");
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
         }
 
         public List<桃園公共自行車即時服務資料> QueryData(string searchColumn, string searchName)
