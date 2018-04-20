@@ -23,6 +23,16 @@ namespace XMLanalysis
         public void InsertData(桃園公共自行車即時服務資料 item)
         {
             cacheList.Add(item);
+
+            count += 1;
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText = string.Format($"insert into 桃園公共自行車即時服務資料 (areaId, areaName, parkName, totalSpace, surplusSpace, payGuide, introduction, address, wgsx, wgsy, parkId) " +
+                                                        $"values ('{item.areaId}','{item.areaName}',N'{item.parkName}','{item.totalSpace}',N'{item.surplusSpace}','{item.payGuide}','{item.introduction}','{item.wgsx}','{item.wgsy}','{item.parkId}')");
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
         }
 
         public void UpdateData(int updateID, 桃園公共自行車即時服務資料 item)
@@ -62,8 +72,6 @@ namespace XMLanalysis
             obj_results.Close();
             connection.Close();
             return NodeList;
-
-            throw new NotImplementedException();
         }
 
         public void ShowData(List<桃園公共自行車即時服務資料> list = null)
