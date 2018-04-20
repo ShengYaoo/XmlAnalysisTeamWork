@@ -1,12 +1,12 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Collections.Generic;
-using System.Linq;
 
 using OpenData;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text;
-
+using XMLanalysis.Shared;
 //http://json2csharp.com/
 namespace XMLanalysis
 
@@ -14,35 +14,82 @@ namespace XMLanalysis
     public class ParkingDB : MGenericsDB<桃園公共自行車即時服務資料>
     {
         public static List<桃園公共自行車即時服務資料> cacheList;
+
+        //我不喜歡用SQL啦qq
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + SharedDB.GetDataPath() + @"mDB.mdf" + ";Integrated Security=True");
+
         private static int count = 0;
 
         public void InsertData(桃園公共自行車即時服務資料 item)
         {
-            throw new NotImplementedException();
+            cacheList.Add(item);
         }
 
-        void UpdateData(int updateID, 桃園公共自行車即時服務資料 item)
+        public void UpdateData(int updateID, 桃園公共自行車即時服務資料 item)
         {
-            throw new NotImplementedException();
+            cacheList[updateID] = item;
         }
-        void DeleteData(string deleteColumn, string deleteName)
-        {
-            throw new NotImplementedException();
-        }
-
 
         public List<桃園公共自行車即時服務資料> QueryData(string searchColumn, string searchName)
         {
+            connection.Open();
+            string cmdtext = $"SELECT * FROM 桃園公共自行車即時服務資料 WHERE {searchColumn}= N'{searchName}' ";
+            SqlCommand cmd = new SqlCommand(cmdtext, connection);
+            SqlDataReader obj_results = cmd.ExecuteReader();
+            List<桃園公共自行車即時服務資料> NodeList = new List<桃園公共自行車即時服務資料>();
+            while (obj_results.Read())
+            {
+                var newitem = new 桃園公共自行車即時服務資料();
+
+                newitem.address = obj_results["address"].ToString();
+                newitem.areaId = obj_results["areaId"].ToString();
+                newitem.areaName = obj_results["areaName"].ToString();
+                newitem.parkName = obj_results["parkName"].ToString();
+
+                newitem.totalSpace = uint.Parse(obj_results["totalSpace"].ToString());
+
+                newitem.surplusSpace = obj_results["surplusSpace"].ToString();
+
+                newitem.payGuide = obj_results["payGuide"].ToString();
+                newitem.introduction = obj_results["introduction"].ToString();
+
+                newitem.wgsx = double.Parse(obj_results["wgsX"].ToString());
+                newitem.wgsy = double.Parse(obj_results["wgsY"].ToString());
+                newitem.parkId = obj_results["parkId"].ToString();
+
+                NodeList.Add(newitem);
+            }
+            obj_results.Close();
+            connection.Close();
+            return NodeList;
+
             throw new NotImplementedException();
         }
 
-        public void ShowData(List<桃園公共自行車即時服務資料> list)
+        public void ShowData(List<桃園公共自行車即時服務資料> list = null)
         {
-            throw new NotImplementedException();
+            if (list == null)
+                list = cacheList;
+
+            list.ForEach(data =>
+            {
+                System.Console.Write(data.areaName + " - ");
+                System.Console.Write(data.parkName);
+            });
+
         }
 
+        public void DeleteData(string deleteColumn, string deleteName)
+        {
+            connection.Open();
+            string cmdtext = $"DELETE FROM  dbo.桃園公共自行車即時服務資料 WHERE {deleteColumn}= N'{deleteName}'";
+            SqlCommand cmd = new SqlCommand(cmdtext, connection);
+            cmd.ExecuteNonQuery();
+            connection.Close();
+        }
         public List<桃園公共自行車即時服務資料> Xml_Load()
         {
+            //寫作Xml讀做json
             var nodeList = new List<桃園公共自行車即時服務資料>();
             using (var webClient = new System.Net.WebClient())
             {
@@ -80,5 +127,7 @@ namespace XMLanalysis
             cacheList = nodeList;
             return nodeList;
         }
+
+
     }
 }
