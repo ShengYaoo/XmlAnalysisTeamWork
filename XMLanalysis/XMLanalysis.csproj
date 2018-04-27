@@ -60,10 +60,12 @@
     <Compile Include="OpenData\FarmTran.cs" />
     <Compile Include="OpenData\PharmaceuticalFactory.cs" />
     <Compile Include="OpenData\Pharmacy_03.cs" />
+    <Compile Include="OpenData\桃園公共自行車即時服務資料.cs" />
     <Compile Include="Repositories\FarmTranTable.cs" />
     <Compile Include="Repositories\MGenericsDB .cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\ParkingDB.cs" />
     <Compile Include="Repositories\PharmacyTable_03.cs" />
     <Compile Include="Repositories\PharmaTable.cs" />
     <Compile Include="Shared\SharedDB.cs" />
@@ -86,6 +88,7 @@
   <ItemGroup>
     <Content Include="App_Data\dbo.FarmTran.sql" />
     <Content Include="App_Data\dbo.PharmaceuticalFactory.sql" />
+    <Content Include="App_Data\dbo.桃園公共自行車即時服務資料.sql" />
     <Content Include="App_Data\dbo.藥局資訊.sql" />
     <Content Include="App_Data\mDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

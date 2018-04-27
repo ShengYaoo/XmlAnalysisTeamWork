@@ -63,6 +63,13 @@ namespace XMLanalysis   {
             mPF.DeleteData("ID", "1");
             Console.WriteLine("Delete ID:1");
             Console.ReadKey();
+            //-------------------------------------------------------------husano896
+            MGenericsDB<桃園公共自行車即時服務資料> mPark = new ParkingDB();
+            var nodeList2 = mPark.Xml_Load();
+            var testitem = new 桃園公共自行車即時服務資料();
+            testitem.parkName = @"測試停車場";
+            mPark.InsertData(testitem);
+            Console.ReadKey();
         }
 
     }
