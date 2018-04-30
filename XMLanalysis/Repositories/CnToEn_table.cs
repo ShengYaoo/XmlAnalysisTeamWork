@@ -18,7 +18,7 @@ namespace XMLanalysis
                 + @"mDB.mdf" 
                 + ";Integrated Security=True");
 
-        //private static int count = 0;
+        private static int count = 0;//條目插入計數器=ID
 
         //取值函数
         public static string getValue(XElement node, string propertyName)
@@ -26,16 +26,32 @@ namespace XMLanalysis
             return node.Element(propertyName)?.Value.Trim();
         }
 
+ 
         //删除函数
         public void DeleteData(string deleteColumn, string deleteName)
         {
-
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText 
+                = string.Format($"DELETE CnToEn WHERE {deleteColumn}= N'{deleteName}' ");
+            cmd.ExecuteNonQuery();//返回受影响的函数！
+            connection.Close();
         }
 
-        //插入
+        //插入各條數據
         public void InsertData(CnToEn item)
         {
-            
+            count++;//id
+            connection.Open();
+            SqlCommand cmd = connection.CreateCommand();
+            cmd.CommandType = System.Data.CommandType.Text;
+            cmd.CommandText 
+                = string.Format($"insert into CnToEn (ID,Col1,Col2,Col3) " 
+                    +$"values ('{count}',N'{item.Postcode}',N'{item.Loc}',N'{item.Name}')");
+            cmd.ExecuteNonQuery();
+            connection.Close();
+
         }
 
         //查询
@@ -89,11 +105,11 @@ namespace XMLanalysis
         {
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = string.Format($"UPDATE Farmtran SET Col = '{item.Postcode}', Col2 = '{item.Loc}', 作物名稱 = N'{item.Name}' WHERE ID = {updateID} ");
+            cmd.CommandText = string.Format($"UPDATE Farmtran SET Col = N'{item.Postcode}', Col2 = N'{item.Loc}', Col3 = N'{item.Name}' WHERE ID = {updateID} ");
             cmd.ExecuteNonQuery();
             connection.Close();
 
-            throw new NotImplementedException();
+          
         }
 
 
