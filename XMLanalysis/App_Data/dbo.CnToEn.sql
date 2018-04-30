@@ -1,0 +1,8 @@
+﻿CREATE TABLE [dbo].[CnToEn] (
+    [Id]  INT            NOT NULL,
+    [Col1] NVARCHAR (MAX) NOT NULL,
+    [Col2] NVARCHAR (MAX) NOT NULL,
+    [Col3] NVARCHAR (MAX) NOT NULL,
+    PRIMARY KEY CLUSTERED ([Id] ASC)
+);
+

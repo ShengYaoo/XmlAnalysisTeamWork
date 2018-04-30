@@ -20,8 +20,8 @@ namespace XMLanalysis
             var connstringbuilder = new SqlConnectionStringBuilder
             {
                 DataSource = @"(LocalDB)\MSSQLLocalDB",
-                AttachDBFilename = @"W:\高三下\多媒體系統\XmlAnalysisTeamWork\XMLanalysis\App_Data\mDB.mdf",
-                // connstringbuilder.InitialCatalog = "mDB.mdf";
+                AttachDBFilename = @".\..\..\App_Data\mDB.mdf",
+                //  connstringbuilder.InitialCatalog = "mDB.mdf";
                 IntegratedSecurity = true
             };
             conn = new SqlConnection(connstringbuilder.ToString());

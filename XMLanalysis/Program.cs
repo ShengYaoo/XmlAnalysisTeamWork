@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Xml.Linq;
 
-namespace XMLanalysis   {
+namespace XMLanalysis
+{
 
     class Program
     {
@@ -63,6 +64,32 @@ namespace XMLanalysis   {
             mPF.DeleteData("ID", "1");
             Console.WriteLine("Delete ID:1");
             Console.ReadKey();
+            //-------------------------------------------------------------husano896
+            MGenericsDB<桃園公共自行車即時服務資料> mPark = new ParkingDB();
+            var nodeList2 = mPark.Xml_Load();
+            var testitem = new 桃園公共自行車即時服務資料();
+            testitem.parkName = @"測試停車場";
+            mPark.InsertData(testitem);
+            Console.ReadKey();
+       
+            //-------------------------------------------------------------Kiyoshimo清霜
+            /*
+            MGenericsDB<CnToEn> mCTE = new CnToEn_table();
+                        var nodeList4 = mCTE.Xml_Load();
+
+                        nodeList4.ForEach(item =>
+                        {
+                            mCTE.InsertData(item);
+                        });
+
+            mCTE.ShowData(mCTE.QueryData("Col1", "100"));
+
+            Console.ReadKey();
+             */
+
+
+
+
         }
 
     }
