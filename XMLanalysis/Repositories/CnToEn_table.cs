@@ -47,7 +47,7 @@ namespace XMLanalysis
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText 
-                = string.Format($"insert into CnToEn (ID,Col1,Col2,Col3) " 
+                = string.Format($"insert into CnToEn (Id,Col1,Col2,Col3) " 
                     +$"values ('{count}',N'{item.Postcode}',N'{item.Loc}',N'{item.Name}')");
             cmd.ExecuteNonQuery();
             connection.Close();
@@ -105,7 +105,7 @@ namespace XMLanalysis
         {
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
-            cmd.CommandText = string.Format($"UPDATE Farmtran SET Col = N'{item.Postcode}', Col2 = N'{item.Loc}', Col3 = N'{item.Name}' WHERE ID = {updateID} ");
+            cmd.CommandText = string.Format($"UPDATE CnToEn SET Col1 = N'{item.Postcode}', Col2 = N'{item.Loc}', Col3 = N'{item.Name}' WHERE Id = {updateID} ");
             cmd.ExecuteNonQuery();
             connection.Close();
 

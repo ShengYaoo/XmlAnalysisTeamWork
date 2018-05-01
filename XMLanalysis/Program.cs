@@ -38,7 +38,7 @@ namespace XMLanalysis
             
             
                 //-------------------------------------------------------------YuSyuan1208     
-                MGenericsDB<Pharmacy_03> mPharmacy_03 = new PharmacyTable_03();
+               // MGenericsDB<Pharmacy_03> mPharmacy_03 = new PharmacyTable_03();
                 /*var nodeList = mPharmacy_03.Xml_Load();
                 nodeList.ForEach(item =>
                 {
@@ -46,7 +46,7 @@ namespace XMLanalysis
                     SqlData = new PharmacyTable_03();
                     SqlData.InsertData(item);
                 });*/
-                
+                /*
                 mPharmacy_03.ShowData(mPharmacy_03.QueryData("機構名稱", "和平藥局"));
                 var nPharmacy_03 = new Pharmacy_03();
                 nPharmacy_03.機構名稱 = "機構名稱";
@@ -84,7 +84,7 @@ namespace XMLanalysis
              mPark.InsertData(testitem);
              Console.ReadKey();
            
-            
+            */
 
             //-------------------------------------------------------------Kiyoshimo清霜
             MGenericsDB<CnToEn> mCTE = new CnToEn_table();
@@ -104,16 +104,20 @@ namespace XMLanalysis
             mCTE.ShowData(mCTE.QueryData("Col1", "103"));
             mCTE.ShowData(mCTE.QueryData("Col2", "臺北市士林區"));
 
-            Console.WriteLine("添加");//添加
-            //mCTE.UpdateData("Col2", "臺北市士林區");
+            Console.WriteLine("添加");//xiuga
+            var NewDataCn = new CnToEn();
+            NewDataCn.Name = "测试英文名"; NewDataCn.Postcode = "测试邮编"; NewDataCn.Loc = "Col2";
+
+            mCTE.UpdateData(9, NewDataCn);
             mCTE.ShowData(mCTE.QueryData("Col1", "103"));
             mCTE.ShowData(mCTE.QueryData("Col2", "臺北市士林區"));
+            mCTE.ShowData(mCTE.QueryData("Col1", "测试邮编"));
 
 
             ////////////////////
             Console.ReadKey();
-             
 
+            
 
 
 
