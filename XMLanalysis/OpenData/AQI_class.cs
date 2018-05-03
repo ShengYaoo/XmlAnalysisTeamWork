@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XMLanalysis.OpenData
+namespace OpenData
 {
-    class AQI_class
+    public class AQI_class
     {
         public string County { get; set; }
         public string AQI { get; set; }

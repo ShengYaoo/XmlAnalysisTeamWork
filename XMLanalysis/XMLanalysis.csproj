@@ -62,6 +62,7 @@
     <Compile Include="OpenData\PharmaceuticalFactory.cs" />
     <Compile Include="OpenData\Pharmacy_03.cs" />
     <Compile Include="OpenData\桃園公共自行車即時服務資料.cs" />
+    <Compile Include="Repositories\AQITable.cs" />
     <Compile Include="Repositories\FarmTranTable.cs" />
     <Compile Include="Repositories\MGenericsDB .cs" />
     <Compile Include="Program.cs" />
@@ -99,6 +100,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>mDB.mdf</DependentUpon>
     </Content>
+    <Content Include="OpenData\AQI.xml" />
     <Content Include="OpenData\FarmTransData.xml" />
     <Content Include="OpenData\PharmaceuticalFactory.xml" />
     <Content Include="OpenData\Pharmacy_03.xml" />
