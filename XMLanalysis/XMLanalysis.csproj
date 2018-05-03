@@ -57,6 +57,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpenData\AQI_class.cs" />
     <Compile Include="OpenData\FarmTran.cs" />
     <Compile Include="OpenData\PharmaceuticalFactory.cs" />
     <Compile Include="OpenData\Pharmacy_03.cs" />
