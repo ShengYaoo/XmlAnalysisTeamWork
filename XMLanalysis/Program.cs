@@ -12,14 +12,15 @@ namespace XMLanalysis
         static void Main(string[] args)
         {
             //-------------------------------------------------------------ShengYaoo
-            MGenericsDB<FarmTran> mFarm = new FarmTranTable();
             /*
+            MGenericsDB<FarmTran> mFarm = new FarmTranTable();
+            
             var nodeList = mFarm.Xml_Load();
             nodeList.ForEach(item =>
             {
                 mFarm.InsertData(item);
             });
-            */
+            
             
             mFarm.ShowData(mFarm.QueryData("作物名稱", "椰子"));
 
@@ -34,46 +35,46 @@ namespace XMLanalysis
             mFarm.DeleteData("交易日期", "107.4.13");
             mFarm.ShowData(mFarm.QueryData("交易日期", "107.4.13"));
             Console.ReadKey();
-           
+           */
             
             
-                //-------------------------------------------------------------YuSyuan1208     
-               // MGenericsDB<Pharmacy_03> mPharmacy_03 = new PharmacyTable_03();
-                /*var nodeList = mPharmacy_03.Xml_Load();
-                nodeList.ForEach(item =>
-                {
-                    PharmacyTable_03 SqlData;
-                    SqlData = new PharmacyTable_03();
-                    SqlData.InsertData(item);
-                });*/
-                /*
-                mPharmacy_03.ShowData(mPharmacy_03.QueryData("機構名稱", "和平藥局"));
-                var nPharmacy_03 = new Pharmacy_03();
-                nPharmacy_03.機構名稱 = "機構名稱";
-                nPharmacy_03.機構狀態 = "機構狀態";
-                nPharmacy_03.地址 = "地址";
-                nPharmacy_03.電話 = "電話";
-                mPharmacy_03.UpdateData(1, nPharmacy_03);
-                mPharmacy_03.DeleteData("機構名稱", "機構名稱");
-                Console.ReadKey();
+            //-------------------------------------------------------------YuSyuan1208     
+            // MGenericsDB<Pharmacy_03> mPharmacy_03 = new PharmacyTable_03();
+            /*var nodeList = mPharmacy_03.Xml_Load();
+            nodeList.ForEach(item =>
+            {
+                PharmacyTable_03 SqlData;
+                SqlData = new PharmacyTable_03();
+                SqlData.InsertData(item);
+            });*/
+            /*
+            mPharmacy_03.ShowData(mPharmacy_03.QueryData("機構名稱", "和平藥局"));
+            var nPharmacy_03 = new Pharmacy_03();
+            nPharmacy_03.機構名稱 = "機構名稱";
+            nPharmacy_03.機構狀態 = "機構狀態";
+            nPharmacy_03.地址 = "地址";
+            nPharmacy_03.電話 = "電話";
+            mPharmacy_03.UpdateData(1, nPharmacy_03);
+            mPharmacy_03.DeleteData("機構名稱", "機構名稱");
+            Console.ReadKey();
 
 
-                //-------------------------------------------------------------JustSoGreat
-                MGenericsDB<PharmaceuticalFactory> mPF = new PharmaTable();
-                var nodeList = mPF.Xml_Load();
-                //nodeList.ForEach(item =>
-                //{
-                //    mPF.InsertData(item);
-                //});
-                //mPF.ShowData(mPF.QueryData("類別", "西藥製劑廠"));
-                var pf = new PharmaceuticalFactory();
-                pf.type = "test藥廠";
-                pf.name = "高應藥廠";
-                mPF.UpdateData(227, pf);
-                Console.WriteLine("UPDATE ID:227，類別:test藥廠，名稱:高應藥廠");
-                mPF.DeleteData("ID", "1");
-                Console.WriteLine("Delete ID:1");
-                Console.ReadKey();
+            //-------------------------------------------------------------JustSoGreat
+            MGenericsDB<PharmaceuticalFactory> mPF = new PharmaTable();
+            var nodeList = mPF.Xml_Load();
+            //nodeList.ForEach(item =>
+            //{
+            //    mPF.InsertData(item);
+            //});
+            //mPF.ShowData(mPF.QueryData("類別", "西藥製劑廠"));
+            var pf = new PharmaceuticalFactory();
+            pf.type = "test藥廠";
+            pf.name = "高應藥廠";
+            mPF.UpdateData(227, pf);
+            Console.WriteLine("UPDATE ID:227，類別:test藥廠，名稱:高應藥廠");
+            mPF.DeleteData("ID", "1");
+            Console.WriteLine("Delete ID:1");
+            Console.ReadKey();
 
 
               //-------------------------------------------------------------husano896
