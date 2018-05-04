@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using XMLanalysis;
 using System.Xml;
 using System.Xml.Linq;
+using XMLanalysis.Shared;
 
 namespace XMLanalysis
 {
@@ -14,7 +15,8 @@ namespace XMLanalysis
     
     class PharmacyTable_03 : MGenericsDB<Pharmacy_03>
     {
-        SqlConnection conn;
+        SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + SharedDB.GetDataPath() + @"mDB.mdf" + ";Integrated Security=True");
+
         void ConnectTo()
         {
             var connstringbuilder = new SqlConnectionStringBuilder
@@ -28,7 +30,7 @@ namespace XMLanalysis
         }
         public PharmacyTable_03()
         {
-            ConnectTo();
+            
         }
         public void insert(Pharmacy_03 p)
         {

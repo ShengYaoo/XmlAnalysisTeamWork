@@ -13,11 +13,12 @@ namespace XMLanalysis   {
             //-------------------------------------------------------------ShengYaoo
             MGenericsDB<FarmTran> mFarm = new FarmTranTable();
             /*
-            var nodeList = mFarm.Xml_Load();
-            nodeList.ForEach(item =>
+            var nodeListf = mFarm.Xml_Load();
+            nodeListf.ForEach(item =>
             {
                 mFarm.InsertData(item);
-            });*/
+            });
+            */
             mFarm.ShowData(mFarm.QueryData("作物名稱", "椰子"));
             var farm = new FarmTran();
             farm.transactionDate = "107.4.13";
