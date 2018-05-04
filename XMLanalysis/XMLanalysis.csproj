@@ -47,9 +47,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\..\..\Program Files\Microsoft SDKs\Azure\.NET SDK\v2.9\bin\plugins\Diagnostics\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -61,10 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="OpenData\CnToEn.cs" />
     <Compile Include="OpenData\FarmTran.cs" />
     <Compile Include="OpenData\PharmaceuticalFactory.cs" />
     <Compile Include="OpenData\Pharmacy_03.cs" />
     <Compile Include="OpenData\桃園公共自行車即時服務資料.cs" />
+    <Compile Include="Repositories\CnToEn_table.cs" />
     <Compile Include="Repositories\FarmTranTable.cs" />
     <Compile Include="Repositories\MGenericsDB .cs" />
     <Compile Include="Program.cs" />
@@ -76,6 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -90,6 +92,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\dbo.CnToEn.sql" />
     <Content Include="App_Data\dbo.FarmTran.sql" />
     <Content Include="App_Data\dbo.PharmaceuticalFactory.sql" />
     <Content Include="App_Data\dbo.桃園公共自行車即時服務資料.sql" />
@@ -101,6 +104,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <DependentUpon>mDB.mdf</DependentUpon>
     </Content>
+    <Content Include="OpenData\CnToEn.xml" />
     <Content Include="OpenData\FarmTransData.xml" />
     <Content Include="OpenData\PharmaceuticalFactory.xml" />
     <Content Include="OpenData\Pharmacy_03.xml" />
