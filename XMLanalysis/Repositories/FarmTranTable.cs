@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
-using OpenData;
+using XMLanalysis.OpenData;
 using System.Xml.Linq;
 using System.Linq;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ namespace XMLanalysis
     public class FarmTranTable : MGenericsDB<FarmTran>
     {
         
-        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+SharedDB.GetDataPath() + @"mDB.mdf" +";Integrated Security=True");
+        SqlConnection connection = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename="+SharedDB.GetDataPath() + @"OpenData.mdf" + ";Integrated Security=True");
         private static int count = 0;
 
         public static string getValue(XElement node, string propertyName)
@@ -22,7 +22,7 @@ namespace XMLanalysis
         public List<FarmTran> Xml_Load()
         {
 
-            XDocument docNew = XDocument.Load(@".\..\..\OpenData\FarmTransData.xml");
+            XDocument docNew = XDocument.Load(SharedDB.GetDataPath()+ "FarmTransData.xml");
             //Console.WriteLine(docNew.ToString());
             IEnumerable<XElement> nodes = docNew.Element("DocumentElement").Elements("row");
 

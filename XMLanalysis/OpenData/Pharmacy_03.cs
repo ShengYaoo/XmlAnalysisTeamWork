@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace XMLanalysis
+namespace XMLanalysis.OpenData
 {
     class Pharmacy_03
     {

@@ -1,7 +1,7 @@
 ﻿//https://data.gov.tw/dataset/25940
 
 //json source: https://data.tycg.gov.tw/opendata/datalist/datasetMeta/download?id=f4cc0b12-86ac-40f9-8745-885bddc18f79&rid=0daad6e6-0632-44f5-bd25-5e1de1e9146f
-namespace OpenData
+namespace XMLanalysis.OpenData
 {
     public class 桃園公共自行車即時服務資料
     {

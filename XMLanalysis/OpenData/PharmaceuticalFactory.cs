@@ -1,5 +1,5 @@
 ﻿
-namespace OpenData
+namespace XMLanalysis.OpenData
 {
   
     public class PharmaceuticalFactory

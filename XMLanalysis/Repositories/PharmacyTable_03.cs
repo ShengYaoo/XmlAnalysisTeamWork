@@ -1,18 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
-using XMLanalysis;
-using System.Xml;
+using System.Linq;
 using System.Xml.Linq;
+using XMLanalysis.OpenData;
 using XMLanalysis.Shared;
 
 namespace XMLanalysis
 {
 
-    
+
     class PharmacyTable_03 : MGenericsDB<Pharmacy_03>
     {
         SqlConnection conn = new SqlConnection(@"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=" + SharedDB.GetDataPath() + @"mDB.mdf" + ";Integrated Security=True");

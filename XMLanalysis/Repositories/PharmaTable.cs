@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System;
 using System.Data.SqlClient;
-using OpenData;
+using XMLanalysis.OpenData;
 using System.Xml.Linq;
 using System.Linq;
 using XMLanalysis.Shared;
