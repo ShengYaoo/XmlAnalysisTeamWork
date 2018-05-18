@@ -22,14 +22,14 @@ namespace XMLanalysis
 
         public void InsertData(桃園公共自行車即時服務資料 item)
         {
-            cacheList.Add(item);
+            //cacheList.Add(item);
 
             count += 1;
             connection.Open();
             SqlCommand cmd = connection.CreateCommand();
             cmd.CommandType = System.Data.CommandType.Text;
             cmd.CommandText = string.Format($"insert into 桃園公共自行車即時服務資料 (areaId, areaName, parkName, totalSpace, surplusSpace, payGuide, introduction, address, wgsx, wgsy, parkId) " +
-                                                        $"values ('{item.areaId}','{item.areaName}',N'{item.parkName}','{item.totalSpace}',N'{item.surplusSpace}','{item.payGuide}','{item.introduction}','{item.address}','{item.wgsx}','{item.wgsy}','{item.parkId}')");
+                                                        $"values (N'{item.areaId}',N'{item.areaName}',N'{item.parkName}',{item.totalSpace},N'{item.surplusSpace}',N'{item.payGuide}',N'{item.introduction}',N'{item.address}','{item.wgsx}','{item.wgsy}',N'{item.parkId}')");
             cmd.ExecuteNonQuery();
             connection.Close();
 
@@ -105,6 +105,7 @@ namespace XMLanalysis
         }
         public List<桃園公共自行車即時服務資料> Xml_Load()
         {
+
             //寫作Xml讀做json
             var nodeList = new List<桃園公共自行車即時服務資料>();
             using (var webClient = new System.Net.WebClient())
@@ -136,6 +137,7 @@ namespace XMLanalysis
                         newitem.parkId = obj_results["parkId"].ToString();
 
                         nodeList.Add(newitem);
+                        InsertData(newitem);
                         System.Console.WriteLine(obj_results["parkName"].ToString());
                     }
 
